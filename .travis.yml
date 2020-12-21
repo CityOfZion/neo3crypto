@@ -1,0 +1,46 @@
+language: python
+python:
+  - "3.8"
+
+jobs:
+  include:
+    # perform a linux build
+    - services: docker
+
+    # and a mac build
+    - os: osx
+      osx_image: xcode10.1
+      language: shell
+    # and a windows build
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.8.6
+        - export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
+        - ln -s /c/Python38/python.exe /c/Python38/python3.exe
+        # Update root certificates to fix SSL error
+        - powershell "md C:\temp\certs; CertUtil -generateSSTFromWU C:\temp\certs\RootStore.sst; Get-ChildItem -Path C:\\temp\certs\Rootstore.sst | Import-Certificate -CertStoreLocation Cert:\\LocalMachine\\Root\\ | out-null"
+
+env:
+  global:
+    - CIBW_BEFORE_BUILD_LINUX="python3 -m pip install cmake"
+    - CIBW_BUILD="cp37-macosx_x86_64 cp37-manylinux_x86_64 cp37-win_amd64 cp38-macosx_x86_64 cp38-manylinux_x86_64 cp38-win_amd64"
+    - HOMEBREW_NO_INSTALL_CLEANUP=1
+
+install:
+  - bash -c 'echo $TRAVIS_OS_NAME'
+  - python3 -m pip install cibuildwheel==1.5.5
+
+script:
+  # build the wheels, put them into './wheelhouse'
+  - python3 -m cibuildwheel --output-dir wheelhouse
+
+deploy:
+  provider: releases
+  api_key: $TRAVIS_GH_DEPLOY
+  file_glob: true
+  file: wheelhouse/*.whl
+  skip_cleanup: true
+  draft: true
+  overwrite: true
+  repo: ixje/neo3crypto
