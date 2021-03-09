@@ -43,4 +43,4 @@ deploy:
   skip_cleanup: true
   draft: true
   overwrite: true
-  repo: ixje/neo3crypto
+  repo: CityOfZion/neo3crypto
