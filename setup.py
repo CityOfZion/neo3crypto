@@ -92,7 +92,7 @@ setup(
     description="Native crypto functions for the NEO 3 Blockchain",
     long_description=readme,
     long_description_content_type="text/x-rst",
-    version='0.1',
+    version='0.2',
     license='MIT',
     url='https://github.com/CityOfZion/neo3crypto',
     classifiers=[

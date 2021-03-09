@@ -90,6 +90,9 @@ PYBIND11_MODULE(neo3crypto, m) {
             .def("__len__", [](ECPoint& self) {
                 if (self.is_infinity()) return 1;
                 return static_cast<int>(self.value_compressed.size());
+            })
+            .def("__deepcopy__", [](ECPoint& self, py::object& memodict) {
+                return ECPoint(self.value_compressed, self.curve, false);
             });
 
     m.def("sign", [](const py::bytes& private_key, const py::bytes& message, ECCCURVE curve, py::function hash_func) {
