@@ -20,8 +20,6 @@ Or download the wheels from the Github releases page.
 
 Windows users
 =============
-::
-
 If installing fails with the error ``No Matching distribution found`` then upgrade your Python installation to use the latest post release version (i.e. ``3.8.8`` instead of ``3.8.0``)
 
 Usage
