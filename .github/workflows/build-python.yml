@@ -16,10 +16,10 @@ jobs:
         with:
           submodules: true
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.1.1
+        uses: pypa/cibuildwheel@v2.8.1
         env:
             CIBW_BEFORE_BUILD_LINUX: "python3 -m pip install cmake"
-            CIBW_BUILD: "cp38-macosx_x86_64 cp38-manylinux_x86_64 cp39-macosx_x86_64 cp39-manylinux_x86_64 cp38-win* cp39-win_amd64 cp39-win32"
+            CIBW_BUILD: "cp38-macosx_x86_64 cp38-manylinux_x86_64 cp39-macosx_x86_64 cp39-manylinux_x86_64 cp38-win_amd64 cp39-win_amd64"
       - name: Deploy
         uses: softprops/action-gh-release@v1
         with:
