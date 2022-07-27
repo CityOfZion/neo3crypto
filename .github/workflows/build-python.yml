@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-11]
+        os: [ubuntu-20.04, macos-11, windows-2019]
 
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
         uses: pypa/cibuildwheel@v2.1.1
         env:
             CIBW_BEFORE_BUILD_LINUX: "python3 -m pip install cmake"
-            CIBW_BUILD: "cp38-macosx_x86_64 cp38-manylinux_x86_64 cp39-macosx_x86_64 cp39-manylinux_x86_64"
+            CIBW_BUILD: "cp38-macosx_x86_64 cp38-manylinux_x86_64 cp39-macosx_x86_64 cp39-manylinux_x86_64 cp38-win* cp39-win_amd64 cp39-win32"
       - name: Deploy
         uses: softprops/action-gh-release@v1
         with:
