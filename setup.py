@@ -61,7 +61,7 @@ class CMakeBuild(build_ext):
                       '-DPYTHON_EXECUTABLE=' + sys.executable]
 
         # cfg = 'Debug' if self.debug else 'Release'
-        cfg = 'Debug'
+        cfg = 'Release'
         build_args = ['--config', cfg]
 
         if platform.system() == "Windows":
@@ -89,11 +89,11 @@ setup(
     author='Erik van den Brink',
     author_email='erik@coz.io',
     name='neo3crypto',
-    python_requires='>=3.8.*,<3.10',
+    python_requires='>=3.8.*',
     description="Native crypto functions for the NEO 3 Blockchain",
     long_description=readme,
     long_description_content_type="text/x-rst",
-    version='0.2.1',
+    version='0.2.2',
     license='MIT',
     url='https://github.com/CityOfZion/neo3crypto',
     classifiers=[
