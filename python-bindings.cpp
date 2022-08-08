@@ -2,6 +2,21 @@
 #include "ecc.h"
 #include <utility>
 #include <vector>
+#include "smhasher/src/MurmurHash3.h"
+
+// for mmh3
+#if defined(_MSC_VER)
+typedef signed __int8 int8_t;
+typedef signed __int32 int32_t;
+typedef signed __int64 int64_t;
+typedef unsigned __int8 uint8_t;
+typedef unsigned __int32 uint32_t;
+typedef unsigned __int64 uint64_t;
+// Other compilers
+#else    // defined(_MSC_VER)
+#include <stdint.h>
+#endif // !defined(_MSC_VER)
+// end for mmh3
 
 namespace py = pybind11;
 using namespace neo3crypto;
@@ -106,4 +121,37 @@ PYBIND11_MODULE(neo3crypto, m) {
         auto message_hash = to_vector(hash_result);
         return verify(to_vector(signature), message_hash, public_key);
     }, py::arg("signature"), py::arg("message"), py::arg("public_key"),  py::arg("hash_func"));
+
+    m.def("mmh3_hash", [](const std::string &s, uint32_t seed, bool is_signed) {
+        const char *target_str = s.data();
+        int32_t iresult[1];
+        uint32_t uresult[1];
+        if (is_signed)
+            MurmurHash3_x86_32(target_str, s.length(), seed, iresult);
+        else
+            MurmurHash3_x86_32(target_str, s.length(), seed, uresult);
+
+        // depending on the input type PYBIND will use PyLong_FromLong or PyLong_FromUnsignedLong
+        // can't seem to specify this as a param?
+        if (is_signed) {
+            return py::int_(iresult[0]);
+        } else {
+            return py::int_(uresult[0]);
+        }
+    }, py::arg("value"), py::arg("seed") = 0, py::arg("signed") = true);
+    m.def("mmh3_hash_bytes", [](const std::string &s, uint32_t seed, bool x64arch) {
+        const char *target_str = s.data();
+        uint32_t result[4];
+
+        if (x64arch) {
+            MurmurHash3_x64_128(target_str, s.length(), seed, result);
+        } else {
+            MurmurHash3_x86_128(target_str, s.length(), seed, result);
+        }
+
+        char bytes[16];
+        memcpy(bytes, result, 16);
+        return py::bytes(bytes, 16);
+    }, py::arg("value"), py::arg("seed") = 0, py::arg("x64arch") = true);
 }
+

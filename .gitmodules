@@ -1,3 +1,6 @@
 [submodule "microecc"]
 	path = microecc
 	url = https://github.com/kmackay/micro-ecc
+[submodule "smhasher"]
+	path = smhasher
+	url = https://github.com/aappleby/smhasher.git

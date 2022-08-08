@@ -92,7 +92,7 @@ setup(
     description="Native crypto functions for the NEO 3 Blockchain",
     long_description=readme,
     long_description_content_type="text/x-rst",
-    version='0.2',
+    version='0.3',
     license='MIT',
     url='https://github.com/CityOfZion/neo3crypto',
     classifiers=[
@@ -101,6 +101,8 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         "Programming Language :: C++"
     ],
     ext_modules=[CMakeExtension('neo3crypto')],
