@@ -10,8 +10,8 @@ from setuptools.command.build_ext import build_ext
 from setuptools.command.install_lib import install_lib as install_lib_orig
 from distutils.version import LooseVersion
 
-if sys.version_info < (3, 7):
-    sys.exit('Python < 3.7 is not supported')
+if sys.version_info < (3, 8):
+    sys.exit('Python < 3.8 is not supported')
 
 exclude = ['*-obj*', 'tools']
 
@@ -61,7 +61,7 @@ class CMakeBuild(build_ext):
                       '-DPYTHON_EXECUTABLE=' + sys.executable]
 
         # cfg = 'Debug' if self.debug else 'Release'
-        cfg = 'Debug'
+        cfg = 'Release'
         build_args = ['--config', cfg]
 
         if platform.system() == "Windows":
@@ -89,6 +89,7 @@ setup(
     author='Erik van den Brink',
     author_email='erik@coz.io',
     name='neo3crypto',
+    python_requires='>=3.8.*',
     description="Native crypto functions for the NEO 3 Blockchain",
     long_description=readme,
     long_description_content_type="text/x-rst",
