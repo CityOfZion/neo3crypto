@@ -16,7 +16,7 @@ jobs:
         with:
           submodules: true
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.8.1
+        uses: pypa/cibuildwheel@v2.11.2
         env:
             CIBW_BEFORE_BUILD_LINUX: "python3 -m pip install cmake"
             CIBW_ARCHS_MACOS: "x86_64 arm64"
