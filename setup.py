@@ -10,8 +10,8 @@ from setuptools.command.build_ext import build_ext
 from setuptools.command.install_lib import install_lib as install_lib_orig
 from distutils.version import LooseVersion
 
-if sys.version_info < (3, 8):
-    sys.exit('Python < 3.8 is not supported')
+if sys.version_info < (3, 10):
+    sys.exit('Python < 3.10 is not supported')
 
 exclude = ['*-obj*', 'tools']
 
@@ -94,19 +94,17 @@ setup(
     author='Erik van den Brink',
     author_email='erik@coz.io',
     name='neo3crypto',
-    python_requires='>=3.8.*',
+    python_requires='>=3.10.0,<=3.12',
     description="Native crypto functions for the NEO 3 Blockchain",
     long_description=readme,
     long_description_content_type="text/x-rst",
-    version='0.3',
+    version='0.4',
     license='MIT',
     url='https://github.com/CityOfZion/neo3crypto',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         "Programming Language :: C++"
     ],
