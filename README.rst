@@ -37,7 +37,7 @@ Usage
     public_key = ECPoint(private_key, curve)
 
     signature = sign(private_key, b'message', curve, hashlib.sha256)
-    assert ecdsa.verify(signature, b'message', public_key, hashlib.sha256) == True
+    assert verify(signature, b'message', public_key, hashlib.sha256) == True
 
     assert mmh3_hash("foo", signed=False) == 4138058784
     assert bytes.fromhex("0bc59d0ad25fde2982ed65af61227a0e") == mmh3_hash_bytes("hello", 123)
