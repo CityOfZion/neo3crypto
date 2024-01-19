@@ -94,7 +94,7 @@ setup(
     author='Erik van den Brink',
     author_email='erik@coz.io',
     name='neo3crypto',
-    python_requires='>=3.11.0,<=3.12',
+    python_requires='>=3.11.0,<3.13',
     description="Native crypto functions for the NEO 3 Blockchain",
     long_description=readme,
     long_description_content_type="text/x-rst",
