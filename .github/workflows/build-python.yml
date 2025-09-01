@@ -21,12 +21,12 @@ jobs:
         with:
           platforms: all
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.16.2
+        uses: pypa/cibuildwheel@v2.23.3
         env:
-            CIBW_BEFORE_BUILD_LINUX: "python3 -m pip install cmake"
+            CIBW_BEFORE_BUILD_LINUX: "python3 -m pip install cmake packaging setuptools"
             CIBW_ARCHS_MACOS: "x86_64 arm64"
             CIBW_ARCHS_LINUX: "auto aarch64"
-            CIBW_BUILD: "cp311-macosx_x86_64 cp311-macosx_arm64 cp311-win_amd64 cp311-manylinux_x86_64 cp311-musllinux_x86_64 cp311-manylinux_aarch64 cp311-musllinux_aarch64 cp312-macosx_x86_64 cp312-macosx_arm64 cp312-win_amd64 cp312-manylinux_x86_64 cp312-musllinux_x86_64 cp312-manylinux_aarch64 cp312-musllinux_aarch64"
+            CIBW_BUILD: "cp312-macosx_x86_64 cp312-macosx_arm64 cp312-win_amd64 cp312-manylinux_x86_64 cp312-musllinux_x86_64 cp312-manylinux_aarch64 cp312-musllinux_aarch64 cp313-macosx_x86_64 cp313-macosx_arm64 cp313-win_amd64 cp313-manylinux_x86_64 cp313-musllinux_x86_64 cp313-manylinux_aarch64 cp313-musllinux_aarch64"
       - name: Deploy
         uses: softprops/action-gh-release@v1
         with:

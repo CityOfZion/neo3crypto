@@ -8,7 +8,8 @@ import fnmatch
 from setuptools import Extension, setup, find_packages
 from setuptools.command.build_ext import build_ext
 from setuptools.command.install_lib import install_lib as install_lib_orig
-from distutils.version import LooseVersion
+from packaging.version import Version
+
 
 if sys.version_info < (3, 11):
     sys.exit('Python < 3.11 is not supported')
@@ -44,8 +45,8 @@ class CMakeBuild(build_ext):
                                ", ".join(e.name for e in self.extensions))
 
         if platform.system() == "Windows":
-            cmake_version = LooseVersion(re.search(r'version\s*([\d.]+)', out.decode()).group(1))
-            if cmake_version < '3.15.0':
+            cmake_version = Version(re.search(r'version\s*([\d.]+)', out.decode()).group(1))
+            if cmake_version < Version('3.15.0'):
                 raise RuntimeError("CMake >= 3.15.0 is required on Windows")
 
         for ext in self.extensions:
@@ -94,19 +95,18 @@ setup(
     author='Erik van den Brink',
     author_email='erik@coz.io',
     name='neo3crypto',
-    python_requires='>=3.11.0,<3.13',
+    python_requires='>=3.12.0,<3.14',
     description="Native crypto functions for the NEO 3 Blockchain",
     long_description=readme,
     long_description_content_type="text/x-rst",
-    version='0.4.3',
+    version='0.4.4',
     license='MIT',
     url='https://github.com/CityOfZion/neo3crypto',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
         "Programming Language :: C++"
     ],
     ext_modules=[CMakeExtension('neo3crypto')],
