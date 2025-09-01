@@ -11,8 +11,8 @@ from setuptools.command.install_lib import install_lib as install_lib_orig
 from packaging.version import Version
 
 
-if sys.version_info < (3, 11):
-    sys.exit('Python < 3.11 is not supported')
+if sys.version_info < (3, 12):
+    sys.exit('Python < 3.12 is not supported')
 
 exclude = ['*-obj*', 'tools']
 
