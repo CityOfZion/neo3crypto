@@ -4,7 +4,7 @@
 
 NEO3VM
 ------
-C++ implementations of cryptographic functions used in the NEO3 Blockchain with bindings for Python 3.10 & 3.11.
+C++ implementations of cryptographic functions used in the NEO3 Blockchain with bindings for Python 3.13 & 3.14.
 
 The current version supports `mmh3` and EllipticCurve functions by wrapping (part of `smhasher <https://github.com/aappleby/smhasher>`_ and `micro-ecc <https://github.com/kmackay/micro-ecc>`_)
 and exposing helper classes. ``SECP256R1`` (a.k.a ``NIST256P``) and ``SECP256K1`` are the only curves exposed, but others can easily
