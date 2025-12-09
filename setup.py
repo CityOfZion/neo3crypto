@@ -11,8 +11,8 @@ from setuptools.command.install_lib import install_lib as install_lib_orig
 from packaging.version import Version
 
 
-if sys.version_info < (3, 12):
-    sys.exit('Python < 3.12 is not supported')
+if sys.version_info < (3, 13):
+    sys.exit('Python < 3.13 is not supported')
 
 exclude = ['*-obj*', 'tools']
 
@@ -95,17 +95,16 @@ setup(
     author='Erik van den Brink',
     author_email='erik@coz.io',
     name='neo3crypto',
-    python_requires='>=3.12.0,<3.14',
+    python_requires='>=3.13.0,<3.15',
     description="Native crypto functions for the NEO 3 Blockchain",
     long_description=readme,
     long_description_content_type="text/x-rst",
-    version='0.4.4',
+    version='0.4.5',
     license='MIT',
     url='https://github.com/CityOfZion/neo3crypto',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'Programming Language :: Python :: 3.12',
         'Programming Language :: Python :: 3.13',
         "Programming Language :: C++"
     ],
